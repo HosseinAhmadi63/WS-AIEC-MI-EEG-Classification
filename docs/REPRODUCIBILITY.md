@@ -44,10 +44,3 @@ The run manifest records the full configuration, package versions, Python
 version, platform, command, timestamp, and Git revision when available.
 After changing source code or a pinned dependency without changing the YAML,
 rerun affected stages with `--force`.
-
-## Comparison policy
-
-Generated metrics are compared with printed paper values by exact keys.
-Differences are reported as absolute errors. Computed learning ranks and Ward
-clusters remain separate from the explicitly named Table 5 and Table 7 paper
-replays; generated values are never silently replaced by reference values.
