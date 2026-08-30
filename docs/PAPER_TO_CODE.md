@@ -39,7 +39,3 @@ Every estimator, CSP transform, scaler, weight optimization, and
 meta-classifier fit is restricted to the relevant development partition. Inner
 chronological validation labels define OOF weights before the later OOF rows.
 The final 20% outer-test partition is used once for evaluation.
-
-Table 10 is an immutable transcription of the article's comparison with prior
-literature. It is validated for structure and content but has no executable
-comparison because the cited studies use independent methods and datasets.
