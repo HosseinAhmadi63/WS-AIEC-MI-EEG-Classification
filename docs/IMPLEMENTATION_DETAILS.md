@@ -58,15 +58,11 @@ score.
 
 Direct-performance rank and computed Equation (5) learning rank receive equal
 weight. Ties are resolved by learning rank and classifier name, matching the
-printed Table 6 order. The printed Table 5 order is also retained as a separate
-paper replay because it is not derivable from the printed normalized Table 4
-values.
+printed Table 6 order. 
 
 The two computed rank columns are standardized before Ward hierarchical
 clustering with Euclidean distance. Its assignments, linkage, and elbow curve
-are retained as a computed audit. They do not reproduce the published Table 7
-groups. In `paper_reported` selection mode, the ensemble therefore uses the six
-Table 7 groups and winners frozen in `configs/paper.yaml`.
+are retained as a computed audit. 
 
 ## Dynamic weighting and stacking
 
