@@ -1,0 +1,23 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: python -m pip install --upgrade pip
+      - run: pip install -r requirements.txt
+      - run: pip install -e . --no-deps
+      - run: pip install "pytest>=8,<10" "pytest-cov>=5,<8" "ruff>=0.9,<1"
+      - run: ruff check .
+      - run: pytest
+      - run: wsaiec-eeg verify-paper --config configs/paper.yaml
+      - run: wsaiec-eeg smoke --config configs/paper.yaml --output results/smoke

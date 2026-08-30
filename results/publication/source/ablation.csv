@@ -1,0 +1,12 @@
+scenario_id,scenario,selected_classifiers,accuracy_bnci2014_002,accuracy_zhou2016
+1,CPA Only,SVM;SVM_rbf;MLP;LR;RC;KN,0.8591,0.8127
+2,LCA Only,NB;PC;SGD;RC;SVM;AB,0.8342,0.7981
+3,CPA + LCA (No Performance Stability),NB;PC;SVM_rbf;RF;LDA;SVM,0.9874,0.9397
+4,CPA + LCA (No Convergence Rate),NB;PC;SVM_rbf;GB;RC;SVM,0.9836,0.9382
+5,CPA + LCA (No AUC-CV),SVM;LDA;SVM_rbf;PC;NB;SGD,0.9841,0.9378
+6,CPA + LCA (Only AUC-CV),NB;MLP;SVM_rbf;AB;SGD;SVM,0.8865,0.8501
+7,CPA + LCA (Only Convergence Rate),NB;PC;RF;SGD;SVM_rbf;SVM,0.9438,0.9061
+8,CPA + LCA (Only Performance Stability),MLP;SVM;RC;PC;NB;SGD,0.8897,0.8511
+9,Without GB,NB;PC;SVM_rbf;LDA;SVM,0.9779,0.9302
+10,Without SVM-rbf,NB;PC;GB;LDA;SVM,0.9180,0.8726
+11,Static Weights,NB;PC;SVM_rbf;GB;LDA;SVM,0.9716,0.9138

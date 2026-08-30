@@ -1,0 +1,17 @@
+classifier,rank
+NB,1
+PC,2
+SGD,3
+RC,4
+SVM,5
+AB,6
+LDA,7
+SVM_rbf,8
+LR,9
+QDA,10
+MLP,11
+GB,12
+KN,13
+DT,14
+RF,15
+ET,16

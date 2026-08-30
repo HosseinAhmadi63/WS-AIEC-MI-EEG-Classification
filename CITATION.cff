@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the IEEE Access article."
+title: "WS-AIEC MI-EEG Classification"
+type: software
+version: 1.0.0
+date-released: 2026-08-30
+license: MIT
+repository-code: "https://github.com/HosseinAhmadi63/WS-AIEC-MI-EEG-Classification"
+authors:
+  - family-names: Ahmadi
+    given-names: Hossein
+    orcid: "https://orcid.org/0000-0002-3650-0280"
+  - family-names: Mesin
+    given-names: Luca
+    orcid: "https://orcid.org/0000-0002-8239-2348"
+preferred-citation:
+  type: article
+  title: "Enhancing MI EEG Signal Classification With a Novel Weighted and Stacked Adaptive Integrated Ensemble Model: A Multi-Dataset Approach"
+  authors:
+    - family-names: Ahmadi
+      given-names: Hossein
+    - family-names: Mesin
+      given-names: Luca
+  journal: "IEEE Access"
+  year: 2024
+  volume: 12
+  start: 103626
+  end: 103646
+  doi: "10.1109/ACCESS.2024.3434654"
+  url: "https://doi.org/10.1109/ACCESS.2024.3434654"

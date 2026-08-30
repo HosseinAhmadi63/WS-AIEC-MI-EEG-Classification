@@ -1,0 +1,65 @@
+{
+  "article": {
+    "title": "Enhancing MI EEG Signal Classification With a Novel Weighted and Stacked Adaptive Integrated Ensemble Model: A Multi-Dataset Approach",
+    "authors": ["Hossein Ahmadi", "Luca Mesin"],
+    "journal": "IEEE Access",
+    "year": 2024,
+    "volume": 12,
+    "pages": "103626-103646",
+    "doi": "10.1109/ACCESS.2024.3434654",
+    "ieee_document": "10613776",
+    "license": "CC BY-NC-ND 4.0"
+  },
+  "files": {
+    "datasets.csv": {
+      "sha256": "88b5421ac77130903cb4f64a5b6f456cac1a0ea8c59e972e50b15d1472aeeb6a",
+      "rows": 6,
+      "source": "Table 1, article page 103630"
+    },
+    "base_classifier_metrics.csv": {
+      "sha256": "922b7cc117c2871bf6d0436d73fca6521296a14d4295f00e711f285ab5893106",
+      "rows": 96,
+      "source": "Table 2, article page 103635"
+    },
+    "aggregated_performance.csv": {
+      "sha256": "5a72706f6020cc4e0aafa99b6e09840e5ff2503987304c791aaf320c9b60856c",
+      "rows": 16,
+      "source": "Table 3, article page 103636"
+    },
+    "learning_curve_metrics.csv": {
+      "sha256": "f8d1adfb9fbb9e822cf8810712580e4e309658a36e9351ea07b2995916af4923",
+      "rows": 96,
+      "source": "Table 4, article page 103638"
+    },
+    "learning_ranking.csv": {
+      "sha256": "f3b2f0908f0b32dbb71243491b32dc3211a64885ae115028f58f390f99db0e9e",
+      "rows": 16,
+      "source": "Table 5, article page 103639"
+    },
+    "overall_ranking.csv": {
+      "sha256": "363b3a88400345253b31685019962706a4eac9d781762d566cd1d967d61a1e96",
+      "rows": 16,
+      "source": "Table 6, article page 103639"
+    },
+    "clusters.csv": {
+      "sha256": "cc28cbfb83627f58e0820b8d946476496c71cdb75cee644f77760d6536e4311b",
+      "rows": 6,
+      "source": "Table 7, article page 103639"
+    },
+    "wsaiec_metrics.csv": {
+      "sha256": "0f4e1c60ab33836d45a4a9d68260dd1c3d97d2b627ef74818ca49c96366cba0b",
+      "rows": 36,
+      "source": "Table 8, article page 103641"
+    },
+    "ablation.csv": {
+      "sha256": "bec58a42eb2ccdc2bd7be1bbcc3a2ab29e2815875efefa8144963e87b58a1e70",
+      "rows": 11,
+      "source": "Table 9, article page 103643"
+    },
+    "related_works.csv": {
+      "sha256": "7cfc2a746984493a8085a418891d497fc522bf090560c3477fd5b53b32225bab",
+      "rows": 26,
+      "source": "Table 10, article page 103644"
+    }
+  }
+}

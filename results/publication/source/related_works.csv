@@ -1,0 +1,27 @@
+reference,classifiers,datasets,eme,wau,sau,ame,cst,accuracy_percent
+"Nicolas et al., 2014 [34]",1,1,true,false,true,false,false,92.00
+"Rahimi et al., 2016 [35]",3,1,true,false,true,false,false,90.27
+"Mohammadpour et al., 2016 [36]",3,1,true,false,false,false,false,73.42
+"Datta et al., 2017 [37]",2,1,true,false,false,false,false,83.57
+"Ramos et al., 2017 [38]",3,2,true,true,false,true,false,97.48
+"Chatterjee et al., 2018 [39]",5,1,true,false,false,false,false,85.71
+"Raza et al., 2019 [40]",1,2,true,true,false,true,false,81.48
+"Salimi et al., 2019 [14]",1,1,true,false,false,true,false,96.00
+"Zhang et al., 2020 [41]",1,2,true,false,false,true,false,90.12
+"Tyagi et al., 2020 [12]",3,1,true,true,false,true,false,85.83
+"Norizadeh et al., 2021 [42]",5,2,true,false,false,true,false,86.91
+"Nugroho et al., 2021 [43]",2,1,true,false,false,false,false,83.28
+"Rashid et al., 2021 [44]",4,4,true,false,false,false,false,99.21
+"Wei et al., 2021 [15]",5,2,true,false,false,false,false,82.99
+"Zheng et al., 2021 [45]",1,1,true,true,false,false,false,81.58
+"Sun et al., 2021 [46]",5,1,true,false,true,false,false,87.80
+"Du et al., 2021 [18]",1,1,true,true,false,true,false,95.00
+"Kanhi et al., 2022 [47]",5,1,true,false,false,false,false,92.00
+"Dolzhikova et al., 2022 [17]",1,1,true,true,false,true,false,95.58
+"Quanyu et al., 2023 [48]",4,1,true,false,false,false,false,91.46
+"Mehtiyev et al., 2023 [11]",4,1,true,true,false,false,false,96.98
+"Almohammadi et al., 2023 [13]",15,1,true,false,true,false,false,86.23
+"Esfahani et al., 2023 [16]",3,2,true,true,false,false,false,97.50
+"Shin et al., 2024 [49]",1,1,true,false,true,true,false,91.71
+"Hossein et al., 2024 [20]",16,4,true,true,true,true,false,98.16
+This Study,16,6,true,true,true,true,true,99.58

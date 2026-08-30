@@ -1,0 +1,7 @@
+dataset,paper_reference,subjects,channels,classes,trials_per_class,trial_duration_s,sampling_rate_hz,sessions
+BNCI2014_001,23,9,22,4,144,4,250,2
+BNCI2014_002,24,14,15,2,80,5,512,1
+BNCI2014_004,25,9,3,2,360,4.5,250,5
+BNCI2015_001,26,12,13,2,200,5,512,2
+Zhou2016,27,4,14,3,160,5,250,3
+AlexMI,28,8,16,3,20,3,512,1

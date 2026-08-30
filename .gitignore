@@ -1,0 +1,30 @@
+.idea/
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Downloaded EEG and deterministic caches
+data/moabb/
+data/cache/
+
+# Generated experiment outputs; keep documentation and transcribed paper tables
+results/runs/*
+!results/runs/.gitkeep
+results/smoke/
+results/publication/generated/*
+!results/publication/generated/.gitkeep
+
+# Model and array artifacts
+*.joblib
+*.pt
+*.pth
+*.npz
+
+# Operating-system files
+.DS_Store
+Thumbs.db

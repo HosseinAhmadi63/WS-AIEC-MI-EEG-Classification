@@ -1,0 +1,288 @@
+project:
+  name: WS-AIEC-MI-EEG-Classification
+  random_seed: 42
+  moabb_root: data/moabb
+  cache_root: data/cache
+  results_root: results
+  n_jobs: -1
+
+datasets:
+  BNCI2014_001:
+    subjects: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    events: [left_hand, right_hand, feet, tongue]
+    channels: 22
+    sampling_rate: 250
+    epoch_duration_seconds: 4.0
+    trials_per_class: 144
+    paper_trials_per_class: 144
+    max_sessions: 2
+  BNCI2014_002:
+    subjects: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+    events: [right_hand, feet]
+    channels: 15
+    sampling_rate: 512
+    epoch_duration_seconds: 5.0
+    trials_per_class: 80
+    paper_trials_per_class: 80
+    max_sessions: 1
+  BNCI2014_004:
+    subjects: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    events: [left_hand, right_hand]
+    channels: 3
+    sampling_rate: 250
+    epoch_duration_seconds: 4.5
+    trials_per_class: 360
+    paper_trials_per_class: 360
+    max_sessions: 5
+  BNCI2015_001:
+    subjects: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    events: [right_hand, feet]
+    channels: 13
+    sampling_rate: 512
+    epoch_duration_seconds: 5.0
+    trials_per_class: 200
+    paper_trials_per_class: 200
+    max_sessions: 2
+  Zhou2016:
+    subjects: [1, 2, 3, 4]
+    events: [left_hand, right_hand, feet]
+    channels: 14
+    sampling_rate: 250
+    epoch_duration_seconds: 5.0
+    trials_per_class: 150
+    paper_trials_per_class: 160
+    max_sessions: 3
+  AlexMI:
+    subjects: [1, 2, 3, 4, 5, 6, 7, 8]
+    events: [right_hand, feet, rest]
+    channels: 16
+    sampling_rate: 512
+    epoch_duration_seconds: 3.0
+    trials_per_class: 20
+    paper_trials_per_class: 20
+    max_sessions: 1
+
+preprocessing:
+  fmin_hz: 7.0
+  fmax_hz: 30.0
+  filter_method: fir
+  fir_window: hamming
+  fir_design: firwin
+  phase: zero
+  l_trans_bandwidth: 2.0
+  h_trans_bandwidth: 2.0
+  resample_hz: null
+  baseline: null
+  reject_artifacts: false
+  output_dtype: float32
+
+features:
+  csp:
+    n_components: 4
+    reg: null
+    log: true
+    norm_trace: false
+    cov_est: concat
+    transform_into: average_power
+  standardize: true
+
+splitting:
+  outer_test_fraction: 0.20
+  outer_strategy: chronological
+  time_series_splits: 8
+  gap: 0
+  training_fractions: [0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70, 0.80, 0.90, 1.00]
+
+evaluation:
+  metrics: [accuracy, precision, recall, f1, auc_roc, kappa]
+  average_binary: weighted
+  average_multiclass: weighted
+  multiclass_auc: ovr
+  auc_input: hard_predictions
+  zero_division: 0
+  subject_aggregation: mean
+  composite_score: arithmetic_mean
+
+classifiers:
+  order: [LDA, LR, PC, SGD, RC, SVM, SVM_rbf, KN, NB, DT, RF, ET, GB, AB, QDA, MLP]
+  LDA:
+    solver: svd
+  LR:
+    C: 1.0
+    solver: lbfgs
+    max_iter: 5000
+  PC:
+    penalty: null
+    alpha: 0.0001
+    max_iter: 3000
+    tol: 0.001
+  SGD:
+    loss: hinge
+    penalty: l2
+    alpha: 0.0001
+    max_iter: 5000
+    tol: 0.001
+  RC:
+    alpha: 1.0
+  SVM:
+    C: 1.0
+    kernel: linear
+    probability: true
+  SVM_rbf:
+    C: 1.0
+    kernel: rbf
+    gamma: scale
+    probability: true
+  KN:
+    n_neighbors: 5
+    weights: uniform
+    metric: minkowski
+  NB:
+    var_smoothing: 1.0e-9
+  DT:
+    criterion: gini
+    max_depth: null
+    min_samples_split: 2
+  RF:
+    n_estimators: 100
+    max_depth: null
+    min_samples_split: 2
+    max_features: sqrt
+    bootstrap: true
+  ET:
+    n_estimators: 100
+    max_depth: null
+    min_samples_split: 2
+    max_features: sqrt
+    bootstrap: false
+  GB:
+    n_estimators: 100
+    learning_rate: 0.1
+    max_depth: 3
+  AB:
+    n_estimators: 50
+    learning_rate: 1.0
+    algorithm: SAMME
+  QDA:
+    reg_param: 0.0
+  MLP:
+    hidden_layer_sizes: [150]
+    activation: relu
+    learning_rate: 0.001
+    weight_decay: 0.0001
+    dropout: 0.5
+    batch_size: 32
+    max_epochs: 300
+    validation_fraction: 0.15
+    early_stopping_patience: 30
+
+tuning:
+  enabled: false
+  scoring: accuracy
+  random_search_iterations: 20
+  SVM_rbf:
+    method: grid
+    parameters:
+      C: [0.1, 1.0, 10.0, 100.0]
+      gamma: [scale, auto, 0.001, 0.01, 0.1]
+  MLP:
+    method: random
+    parameters:
+      hidden_layer_sizes: [[100], [150], [200], [150, 75]]
+      learning_rate: [0.0003, 0.001, 0.003]
+      weight_decay: [0.00001, 0.0001, 0.001]
+      dropout: [0.25, 0.5]
+  RF:
+    method: random
+    parameters:
+      n_estimators: [100, 200, 500]
+      max_depth: [null, 10, 20, 40]
+      min_samples_split: [2, 5, 10]
+      max_features: [sqrt, log2]
+  ET:
+    method: random
+    parameters:
+      n_estimators: [100, 200, 500]
+      max_depth: [null, 10, 20, 40]
+      min_samples_split: [2, 5, 10]
+      max_features: [sqrt, log2]
+
+ranking:
+  performance_metric_weights:
+    accuracy: 1.0
+    precision: 1.0
+    recall: 1.0
+    f1: 1.0
+    auc_roc: 1.0
+    kappa: 1.0
+  learning_metric_weights:
+    auc_cv: 1.0
+    convergence_rate: 1.0
+    performance_stability: 1.0
+  composite_weights:
+    performance_rank: 1.0
+    learning_rank: 1.0
+  clustering_method: ward
+  clustering_metric: euclidean
+  standardize_rank_features: true
+  number_of_clusters: 6
+  learning_ranking_replay_mode: paper_reported
+  cluster_selection_mode: paper_reported
+  reported_clusters:
+    1: [SGD, KN, NB]
+    2: [PC, DT, AB]
+    3: [MLP, SVM_rbf, LR]
+    4: [ET, GB]
+    5: [LDA, QDA]
+    6: [RF, SVM, RC]
+  reported_cluster_winners: [NB, PC, SVM_rbf, GB, LDA, SVM]
+  reported_overall_ranks:
+    SVM: 1
+    RC: 2
+    SVM_rbf: 3
+    LR: 4
+    NB: 5
+    SGD: 6
+    MLP: 7
+    PC: 8
+    LDA: 9
+    KN: 10
+    AB: 11
+    QDA: 12
+    GB: 13
+    RF: 14
+    ET: 15
+    DT: 16
+
+wsaiec:
+  meta_classifier: SVM
+  base_classifiers: [NB, PC, SVM_rbf, GB, LDA]
+  meta_features: hard_predictions
+  validation_fraction: 0.20
+  dynamic_weight_formula: softmax_accuracy
+  alpha_optimization:
+    lower: 0.01
+    upper: 20.0
+    initial_points: 5
+    iterations: 20
+    candidates_per_iteration: 512
+    kappa: 2.576
+    scoring: accuracy
+  meta_svm:
+    C: 1.0
+    kernel: linear
+    probability: true
+  reported_static_weights:
+    NB: 0.1079
+    PC: 0.0676
+    SVM_rbf: 0.1810
+    GB: 0.0420
+    LDA: 0.0603
+    SVM: 0.5411
+
+publication:
+  doi: 10.1109/ACCESS.2024.3434654
+  article_url: https://doi.org/10.1109/ACCESS.2024.3434654
+  reference_tables: results/publication/source
+  generated_outputs: results/publication/generated
+  comparison_tolerance: 0.00015
