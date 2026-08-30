@@ -55,7 +55,7 @@ scripts/run_learning_curves.py       Run the 10%-100% TSCV learning experiment
 scripts/run_wsaiec.py                Tune dynamic weights and evaluate WS-AIEC
 scripts/run_ablations.py             Run all eleven Table 9 ablation scenarios
 scripts/reproduce_paper_analysis.py  Aggregate, verify, and compare all paper tables
-scripts/make_figures.py              Generate equivalents of Figures 2-6
+scripts/make_figures.py              Generate Figures 2-6
 scripts/run_all.py                   Run the complete ordered pipeline
 src/wsaiec_eeg/                      Installable implementation
 tests/                               Scientific, configuration, and CLI checks
@@ -155,22 +155,6 @@ python scripts/run_ablations.py --config configs/paper.yaml --dataset BNCI2014_0
 Learning curves are dataset-scoped and therefore always use every configured
 participant. A participant-filtered WS-AIEC or ablation run is diagnostic mode;
 paper-mode alpha tuning uses the complete dataset cohort.
-
-## Published WS-AIEC targets
-
-| Dataset | Accuracy | Precision | Recall | F1 | AUC-ROC | Kappa |
-|---|---:|---:|---:|---:|---:|---:|
-| BNCI2014-001 | 0.9688 | 0.9700 | 0.9688 | 0.9687 | 0.9688 | 0.9375 |
-| BNCI2014-002 | 0.9958 | 0.9959 | 0.9958 | 0.9958 | 0.9972 | 0.9944 |
-| BNCI2014-004 | 0.9625 | 0.9646 | 0.9625 | 0.9624 | 0.9625 | 0.9250 |
-| BNCI2015-001 | 0.9875 | 0.9879 | 0.9875 | 0.9875 | 0.9891 | 0.9745 |
-| Zhou2016 | 0.9458 | 0.9474 | 0.9458 | 0.9458 | 0.9462 | 0.8912 |
-| AlexMI | 0.9500 | 0.9517 | 0.9500 | 0.9499 | 0.9492 | 0.8995 |
-
-The paper reports a 20.23 percentage-point mean accuracy gain. The printed
-Table 8 values give 21.88 points when WS-AIEC is compared with all 30 displayed
-SVM, RC, SVM-RBF, LR, and NB cells, so the repository records the published
-claim without inventing an unreported aggregation rule.
 
 ## Outputs
 
