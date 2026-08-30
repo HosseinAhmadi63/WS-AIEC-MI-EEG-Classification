@@ -45,52 +45,6 @@ Machine-readable metadata are provided in [CITATION.cff](CITATION.cff).
 | Dynamic weights | Softmax of one dataset-level Bayesian-tuned alpha multiplied by validation accuracy |
 | Stacking input | One dynamically weighted hard prediction per base classifier |
 
-The article does not publish the FIR phase, resampling/baseline/artifact policy,
-CSP component count or feature scaling, most classifier hyperparameters, the
-exact AUC input, the cross-subject learning-curve construction, alpha bounds,
-optimized alpha values, the meaning of a training epoch for batch classifiers,
-the complete stacking fit protocol, or enough clustering detail to regenerate
-Table 7. The frozen implementation completes those operations deterministically
-as follows:
-
-| Operation | Executable definition |
-|---|---|
-| Filtering completion | MNE zero-phase `firwin`; no resampling, baseline correction, or artifact rejection |
-| CSP | n_components=4, reg=None, logarithmic average power, no trace normalization |
-| Feature scaling | Fold-local z-score standardization after CSP |
-| Classifiers | Explicit overrides in configs/paper.yaml plus the pinned libraries' documented defaults; every stochastic estimator uses seed 42 plus deterministic participant/fold offsets |
-| ROC-AUC | One-vs-rest AUC from hard class predictions; absent validation classes are skipped and a single-class fold receives neutral AUC 0.5 |
-| Learning-curve construction | Chronological prefixes are concatenated in configured participant order before fresh fold-local TSCV; pooled x-scale is required by Figure 3 and Table 4 |
-| Dynamic epoch | One expanding time-series validation fold; its weight is learned on an earlier inner chronological validation block |
-| Dynamic validation | Chronologically last 20% of the outer development partition |
-| Alpha search | One shared alpha per dataset; Gaussian-process upper-confidence optimization on [0.01, 20.0], 20 evaluations, 512 candidates per acquisition step |
-| Meta training | Earlier-weighted out-of-fold hard predictions plus the chronological alpha-validation block; final outer-test labels remain untouched |
-| Final weights | Equation 9 evaluated from the held-out development-validation accuracies at the optimized alpha |
-| Table 5 replay | The computed Equation (5) ranking is retained separately because the printed Table 5 order is not derivable from the printed normalized Table 4 values |
-| Table 7 replay | Ward results are retained as a computed audit; the reported groups and winners are frozen for the paper ensemble because the two printed rankings do not regenerate Table 7 |
-| Table 9 scenarios | Classifier sets are read exactly from Table 9; scenarios 1-10 retune dynamic weights and scenario 11 uses the five literal Table 7 base weights without renormalization |
-
-The paper says trials are ordered and split within each subject, yet Figure 3
-uses a pooled BNCI2014-002 x-axis reaching about 1,750 training examples. It
-does not state how participant blocks are combined for that curve. Literal
-eight-fold subject-wise validation is also impossible for the 10% AlexMI
-prefix, which contains only five development trials per subject. The executable
-therefore freezes participant-order pooling before TSCV, records all pooled and
-fold-level counts, and keeps this completion distinct from a reported method.
-
-Table 1 reports 160 Zhou2016 trials per class. The public Zhou2016 files contain
-three sessions with two runs of 25 trials per class, totaling 150 trials per
-class. The executable cache validates the 150 available trials and preserves
-the paper's printed value separately in the configuration and reference table.
-
-The pooled development volumes used by Figure 3 and Equation (2) are 4,140,
-1,792, 5,184, 3,840, 1,440, and 384 samples in dataset order. Five Table 4
-AUC-CV scales agree with those widths. BNCI2014-001 is internally inconsistent:
-its printed AUC-CV range of 657-804 over the expected width of 3,726 implies a
-mean four-class cross-validation score below chance. The executable keeps all
-nine participants and reports the resulting difference instead of shrinking
-the cohort to fit the table.
-
 ## Repository structure
 
 ~~~text
